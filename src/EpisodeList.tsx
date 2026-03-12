@@ -1,3 +1,4 @@
+import DOMPurify from "dompurify";
 import { useEffect, useState } from "react";
 import { getRSSEpisodes } from "./lib/rss";
 import type { Episode, Podcast } from "./types";
@@ -24,11 +25,19 @@ const EpisodeList = (props: EpisodeListProps) => {
 
   return episodes.map((episode) => {
     return (
-      <div key={episode.id}>
-        <a href={episode.link} download>
-          {episode.name}
-        </a>
-      </div>
+      <details key={episode.id} style={{ border: "1px solid" }}>
+        <summary>
+          <a href={episode.link} download>
+            {episode.name}
+          </a>
+        </summary>
+        <div
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: sanitized with DOMPurify
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(episode.description),
+          }}
+        ></div>
+      </details>
     );
   });
 };
