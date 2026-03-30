@@ -23,23 +23,27 @@ const EpisodeList = (props: EpisodeListProps) => {
     getEpisodes();
   }, [activePodcast]);
 
-  return episodes.map((episode) => {
-    return (
-      <details key={episode.id} style={{ border: "1px solid" }}>
-        <summary>
-          <a href={episode.link} download>
-            {episode.name}
-          </a>
-        </summary>
-        <div
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: sanitized with DOMPurify
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(episode.description),
-          }}
-        ></div>
-      </details>
-    );
-  });
+  return (
+    <div>
+      {episodes.map((episode) => {
+        return (
+          <details key={episode.id} style={{ border: "1px solid" }}>
+            <summary>
+              <a href={episode.link} download>
+                {episode.name}
+              </a>
+            </summary>
+            <div
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: sanitized with DOMPurify
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(episode.description),
+              }}
+            ></div>
+          </details>
+        );
+      })}
+    </div>
+  );
 };
 
 export default EpisodeList;

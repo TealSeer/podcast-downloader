@@ -7,12 +7,8 @@ const App = () => {
   const [activePodcast, setActivePodcast] = useState<Podcast>();
   return (
     <>
-      <span>
-        <PodcastList setActivePodcast={setActivePodcast}></PodcastList>
-      </span>
-      <span>
-        <EpisodeList activePodcast={activePodcast}></EpisodeList>
-      </span>
+      <PodcastList setActivePodcast={setActivePodcast}></PodcastList>
+      <EpisodeList activePodcast={activePodcast}></EpisodeList>
     </>
   );
 };

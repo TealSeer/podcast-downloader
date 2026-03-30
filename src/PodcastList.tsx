@@ -39,7 +39,7 @@ const PodcastList = (props: PodcastListProps) => {
   };
 
   return (
-    <>
+    <div>
       <form onSubmit={urlSubmit}>
         <input type="text" name="url" placeholder="URL..." autoComplete="off" />
         <button type="submit">Add</button>
@@ -58,7 +58,7 @@ const PodcastList = (props: PodcastListProps) => {
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
 
