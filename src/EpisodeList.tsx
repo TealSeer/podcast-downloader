@@ -1,5 +1,5 @@
-import DOMPurify from "dompurify";
 import { useEffect, useState } from "react";
+import Episode from "./Episode";
 import { getRSSEpisodes } from "./lib/rss";
 import type { EpisodeData, Podcast } from "./types";
 
@@ -22,21 +22,7 @@ const EpisodeList = (props: EpisodeListProps) => {
   return (
     <div>
       {episodes.map((episode) => {
-        return (
-          <details key={episode.id} style={{ border: "1px solid" }}>
-            <summary>
-              <a href={episode.link} download>
-                {episode.name}
-              </a>
-            </summary>
-            <div
-              // biome-ignore lint/security/noDangerouslySetInnerHtml: sanitized with DOMPurify
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(episode.description),
-              }}
-            ></div>
-          </details>
-        );
+        return <Episode data={episode} key={episode.id} />;
       })}
     </div>
   );
