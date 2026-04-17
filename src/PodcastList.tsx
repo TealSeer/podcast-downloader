@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useLocalStorage } from "usehooks-ts";
 import { getRSSTitle } from "./lib/rss";
 import type { Podcast } from "./types";
 
@@ -8,12 +8,7 @@ type PodcastListProps = {
 
 const PodcastList = (props: PodcastListProps) => {
   const { setActivePodcast } = props;
-  const [podcasts, setPodcasts] = useState<Podcast[]>(
-    JSON.parse(localStorage.getItem("podcasts") ?? "[]"),
-  );
-  useEffect(() => {
-    localStorage.setItem("podcasts", JSON.stringify(podcasts));
-  }, [podcasts]);
+  const [podcasts, setPodcasts] = useLocalStorage<Podcast[]>("podcasts", []);
 
   const urlSubmit = (e: React.SubmitEvent) => {
     e.preventDefault();
