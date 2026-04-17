@@ -3,7 +3,7 @@ export type Podcast = {
   url: string;
 };
 
-export type Episode = {
+export type EpisodeData = {
   name: string;
   id: string;
   description: string;

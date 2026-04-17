@@ -1,5 +1,5 @@
 import { XMLParser } from "fast-xml-parser";
-import type { Episode } from "../types";
+import type { EpisodeData } from "../types";
 
 export const getRSSTitle = async (url: string) => {
   const response = await fetch(url);
@@ -18,7 +18,7 @@ export const getRSSEpisodes = async (url: string) => {
   }
   const parser = new XMLParser({ ignoreAttributes: false});
   const data = parser.parse(await response.text());
-  const episodes: Episode[] = [];
+  const episodes: EpisodeData[] = [];
   for(var episode of data.rss.channel.item) {
     episodes.push({name: episode.title, id: episode["omny:clipId"], description: episode.description, link: episode["media:content"][0]["@_url"]})
   }

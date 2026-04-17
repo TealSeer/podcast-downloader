@@ -1,21 +1,17 @@
 import DOMPurify from "dompurify";
 import { useEffect, useState } from "react";
 import { getRSSEpisodes } from "./lib/rss";
-import type { Episode, Podcast } from "./types";
+import type { EpisodeData, Podcast } from "./types";
 
 type EpisodeListProps = {
-  activePodcast?: Podcast;
+  activePodcast: Podcast;
 };
 
 const EpisodeList = (props: EpisodeListProps) => {
   const { activePodcast } = props;
-  const [episodes, setEpisodes] = useState<Episode[]>([]);
+  const [episodes, setEpisodes] = useState<EpisodeData[]>([]);
 
   useEffect(() => {
-    if (activePodcast === undefined) {
-      setEpisodes([]);
-      return;
-    }
     const getEpisodes = async () => {
       const eps = await getRSSEpisodes(activePodcast.url);
       setEpisodes(eps);

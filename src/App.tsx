@@ -8,7 +8,9 @@ const App = () => {
   return (
     <>
       <PodcastList setActivePodcast={setActivePodcast}></PodcastList>
-      <EpisodeList activePodcast={activePodcast}></EpisodeList>
+      {activePodcast && (
+        <EpisodeList activePodcast={activePodcast}></EpisodeList>
+      )}
     </>
   );
 };
