@@ -1,0 +1,1 @@
+This app takes RSS feed URLs for podcasts (the exact tags it looks for can be found [here](src/lib/rss.ts)) and provides an episode list with direct download links to episode files, as well as the option to mark episodes as listened to. All data is stored in the browser's local storage, so no backend is needed.
