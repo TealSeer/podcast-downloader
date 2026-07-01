@@ -1,4 +1,7 @@
 import { useLocalStorage } from "usehooks-ts";
+import { Button } from "./components/ui/button";
+import { Field } from "./components/ui/field";
+import { Input } from "./components/ui/input";
 import { getRSSTitle } from "./lib/rss";
 import type { Podcast } from "./types";
 
@@ -36,19 +39,26 @@ const PodcastList = (props: PodcastListProps) => {
   return (
     <div>
       <form onSubmit={urlSubmit}>
-        <input type="text" name="url" placeholder="URL..." autoComplete="off" />
-        <button type="submit">Add</button>
+        <Field>
+          <Input
+            type="text"
+            name="url"
+            placeholder="URL..."
+            autoComplete="off"
+          />
+          <Button type="submit">Add</Button>
+        </Field>
       </form>
       <div>
         {podcasts.map((podcast) => {
           return (
             <div key={podcast.url}>
-              <button type="button" onClick={() => setActivePodcast(podcast)}>
+              <Button type="button" onClick={() => setActivePodcast(podcast)}>
                 {podcast.name}
-              </button>
-              <button type="button" onClick={() => deletePodcast(podcast)}>
+              </Button>
+              <Button type="button" onClick={() => deletePodcast(podcast)}>
                 X
-              </button>
+              </Button>
             </div>
           );
         })}
