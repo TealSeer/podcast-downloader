@@ -52,8 +52,12 @@ const PodcastList = (props: PodcastListProps) => {
       <div>
         {podcasts.map((podcast) => {
           return (
-            <div key={podcast.url}>
-              <Button type="button" onClick={() => setActivePodcast(podcast)}>
+            <div className="flex" key={podcast.url}>
+              <Button
+                type="button"
+                className="flex-1"
+                onClick={() => setActivePodcast(podcast)}
+              >
                 {podcast.name}
               </Button>
               <Button type="button" onClick={() => deletePodcast(podcast)}>

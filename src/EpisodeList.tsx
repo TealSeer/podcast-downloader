@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
+import { ScrollArea } from "./components/ui/scroll-area";
 import Episode from "./Episode";
 import { getRSSEpisodes } from "./lib/rss";
 import type { EpisodeData, Podcast } from "./types";
@@ -36,7 +37,7 @@ const EpisodeList = (props: EpisodeListProps) => {
   }, [activePodcast]);
 
   return (
-    <div>
+    <ScrollArea className="h-screen">
       {episodes.map((episode) => {
         return (
           <Episode
@@ -47,7 +48,7 @@ const EpisodeList = (props: EpisodeListProps) => {
           />
         );
       })}
-    </div>
+    </ScrollArea>
   );
 };
 
