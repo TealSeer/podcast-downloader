@@ -6,11 +6,11 @@ import type { Podcast } from "./types";
 const App = () => {
   const [activePodcast, setActivePodcast] = useState<Podcast>();
   return (
-    <div className="flex gap-5">
-      <div className="flex-1/3">
+    <div className="flex gap-2.5">
+      <div className="flex-2/12">
         <PodcastList setActivePodcast={setActivePodcast}></PodcastList>
       </div>
-      <div className="flex-2/3">
+      <div className="flex-10/12">
         {activePodcast && (
           <EpisodeList activePodcast={activePodcast}></EpisodeList>
         )}
