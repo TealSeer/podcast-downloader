@@ -1,36 +1,47 @@
-import DOMPurify from "dompurify";
+import { ArrowSquareOutIcon, CheckCircleIcon } from "@phosphor-icons/react";
+import { Button } from "./components/ui/button";
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemTitle,
+} from "./components/ui/item";
+import { lengthString } from "./lib/utils";
 import type { EpisodeData } from "./types";
 
 type EpisodeProps = {
   data: EpisodeData;
-  toggleListener: (id: string, newVal: boolean) => void;
-  listened: boolean;
+  listenedEpisodes: Map<string, boolean>;
+  setListenedEpisodes: (arg0: Map<string, boolean>) => void;
 };
 
 const Episode = (props: EpisodeProps) => {
-  const { listened, toggleListener } = props;
-  const { name, id, description, link } = props.data;
+  const { listenedEpisodes, setListenedEpisodes } = props;
+  const { name, id, date, length, description, link } = props.data;
+  const isChecked = listenedEpisodes.get(id) ?? false;
+
+  const toggleListened = () => {
+    const newMap = new Map<string, boolean>(listenedEpisodes);
+    isChecked ? newMap.delete(id) : newMap.set(id, true);
+    setListenedEpisodes(newMap);
+  };
 
   return (
-    <details style={{ border: "1px solid" }}>
-      <summary>
-        <input
-          type="checkbox"
-          title="Listened"
-          defaultChecked={listened}
-          onChange={(e) => toggleListener(id, e.target.checked)}
-        />
-        <a href={link} download>
-          {name}
-        </a>
-      </summary>
-      <div
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: sanitized with DOMPurify
-        dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(description),
-        }}
-      ></div>
-    </details>
+    <Item>
+      <ItemContent>
+        <ItemTitle>{name}</ItemTitle>
+        <ItemDescription>{`${date.toLocaleDateString()} | ${lengthString(length)}`}</ItemDescription>
+      </ItemContent>
+      <ItemActions>
+        <Button onClick={toggleListened}>
+          <CheckCircleIcon color={isChecked ? "green" : "red"} />
+        </Button>
+        <Button onClick={() => window.open(link)}>
+          <ArrowSquareOutIcon />
+        </Button>
+      </ItemActions>
+    </Item>
   );
 };
 

@@ -26,7 +26,7 @@ export const getRSSEpisodes = async (url: string) => {
   const data = parser.parse(await response.text());
   const episodes: EpisodeData[] = [];
   for(var episode of data.rss.channel.item) {
-    episodes.push({name: episode.title, id: episode["omny:clipId"], description: episode.description, link: episode["media:content"][0]["@_url"]})
+    episodes.push({name: episode.title, id: episode["omny:clipId"], date: new Date(episode.pubDate), length: episode["itunes:duration"], description: episode.description, link: episode["media:content"][0]["@_url"]})
   }
   return episodes;
 }

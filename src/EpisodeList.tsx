@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
+import { ItemGroup } from "./components/ui/item";
 import { ScrollArea } from "./components/ui/scroll-area";
 import Episode from "./Episode";
 import { getRSSEpisodes } from "./lib/rss";
@@ -22,12 +23,6 @@ const EpisodeList = (props: EpisodeListProps) => {
       new Map<string, boolean>(Object.entries(JSON.parse(val))),
   });
 
-  const toggleListened = (id: string, newVal: boolean) => {
-    const newMap = new Map<string, boolean>(listenedEpisodes);
-    newVal ? newMap.set(id, true) : newMap.delete(id);
-    setListenedEpisodes(newMap);
-  };
-
   useEffect(() => {
     const getEpisodes = async () => {
       const eps = await getRSSEpisodes(activePodcast.url);
@@ -38,16 +33,18 @@ const EpisodeList = (props: EpisodeListProps) => {
 
   return (
     <ScrollArea className="h-screen">
-      {episodes.map((episode) => {
-        return (
-          <Episode
-            data={episode}
-            key={episode.id}
-            toggleListener={toggleListened}
-            listened={listenedEpisodes.get(episode.id) ?? false}
-          />
-        );
-      })}
+      <ItemGroup>
+        {episodes.map((episode) => {
+          return (
+            <Episode
+              data={episode}
+              key={episode.id}
+              listenedEpisodes={listenedEpisodes}
+              setListenedEpisodes={setListenedEpisodes}
+            />
+          );
+        })}
+      </ItemGroup>
     </ScrollArea>
   );
 };
