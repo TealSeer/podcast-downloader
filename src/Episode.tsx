@@ -18,7 +18,7 @@ type EpisodeProps = {
 
 const Episode = (props: EpisodeProps) => {
   const { listenedEpisodes, setListenedEpisodes } = props;
-  const { name, id, date, length, description, link } = props.data;
+  const { name, id, date, length, link } = props.data;
   const isChecked = listenedEpisodes.get(id) ?? false;
 
   const toggleListened = () => {
