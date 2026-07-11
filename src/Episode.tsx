@@ -28,7 +28,7 @@ const Episode = (props: EpisodeProps) => {
   };
 
   return (
-    <Item>
+    <Item variant="outline" size="xs">
       <ItemContent>
         <ItemTitle>{name}</ItemTitle>
         <ItemDescription>{`${date.toLocaleDateString()} | ${lengthString(length)}`}</ItemDescription>
