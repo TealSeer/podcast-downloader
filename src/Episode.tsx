@@ -37,9 +37,11 @@ const Episode = (props: EpisodeProps) => {
         <Button onClick={toggleListened}>
           <CheckCircleIcon color={isChecked ? "green" : "red"} />
         </Button>
-        <Button onClick={() => window.open(link)}>
-          <ArrowSquareOutIcon />
-        </Button>
+        <a href={link} target="_blank">
+          <Button>
+            <ArrowSquareOutIcon />
+          </Button>
+        </a>
       </ItemActions>
     </Item>
   );
